@@ -1,22 +1,27 @@
-# SocksNode Proxy Integration Examples
+# SocksNode Proxy Networks
 
-Practical, copyable examples for using SocksNode HTTP(S) and SOCKS5 endpoints with cURL, Python Requests, and Playwright.
+Compare residential, mobile, datacenter, and static ISP proxies from SocksNode. Explore IP types, location targeting, rotation, protocols, billing, and setup in the [SocksNode proxy network guide](https://socksnode.github.io/socksnode-proxy-examples/).
 
-**Read the guide:** [SocksNode Proxy Setup Examples](https://socksnode.github.io/socksnode-proxy-examples/)
-**Product docs:** [Mobile proxy by the day](https://socksnode.com/en/mobile-proxies) Â· [Residential proxies](https://socksnode.com/en/residential-proxies) Â· [API docs](https://socksnode.com/en/docs)
+## Choose a proxy type
 
-## Examples
+- [Residential proxies](https://socksnode.com/en/residential-proxies) - rotating residential IPs, location and ISP targeting, prepaid bandwidth, and sticky sessions.
+- [Mobile proxies](https://socksnode.com/en/mobile-proxies) - time-rented 4G/5G ports with a daily data allowance and on-demand IP changes.
+- [Datacenter proxies](https://socksnode.com/en/datacenter-proxies) - rotating server IPs, location and ASN targeting, and prepaid bandwidth.
+- [Static ISP proxies](https://socksnode.com/en/isp-proxies) - dedicated ISP IPs rented for a chosen period.
 
-- [`examples/curl.sh`](examples/curl.sh) â€” send a request through an HTTP or SOCKS5 endpoint.
-- [`examples/python_requests.py`](examples/python_requests.py) â€” use Requests with an environment-provided proxy.
-- [`examples/playwright.mjs`](examples/playwright.mjs) â€” configure an authenticated HTTP proxy in Playwright.
+Features, locations, prices, and limits vary by product and plan. Check the linked product pages for current availability and details, or [view SocksNode pricing](https://socksnode.com/en/pricing).
 
-## Mobile proxy facts
+## Developer examples
 
-Mobile ports are rented by time, from a two-hour trial to longer terms. The base data allowance is 15 GB per port per day. Higher daily allowances are paid options; unlimited daily data is only available on eligible tiers. Locations depend on tier. See the [live product page](https://socksnode.com/en/mobile-proxies) for current availability, pricing, and limits.
+- [cURL](examples/curl.sh)
+- [Python Requests](examples/python_requests.py)
+- [Playwright for Node.js](examples/playwright.mjs)
+- [API documentation](https://socksnode.com/en/docs)
 
-## Credentials and responsible use
+Set `SOCKSNODE_PROXY` to the endpoint copied from your dashboard. Keep usernames, passwords, and API keys in environment variables or a secret manager; never commit working credentials.
 
-Set `SOCKSNODE_PROXY` to the endpoint copied from your dashboard. Store credentials in environment variables or a secret manager; never commit real credentials. Use proxies only for permitted, lawful workflows and respect destination-site terms, access controls, and privacy requirements.
+## About SocksNode
 
-Availability and third-party website behavior can change. These examples do not guarantee that a destination will accept a request.
+SocksNode provides proxy products for developers and businesses. Product availability and specifications can change; the linked SocksNode pages and dashboard are the source for current options.
+
+Use proxy services only for permitted, lawful workflows and respect destination-site terms, access controls, and privacy requirements.
