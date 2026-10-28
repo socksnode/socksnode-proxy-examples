@@ -3,14 +3,13 @@
 Practical, copyable examples for using SocksNode HTTP(S) and SOCKS5 endpoints with cURL, Python Requests, and Playwright.
 
 **Read the guide:** [SocksNode Proxy Setup Examples](https://socksnode.github.io/socksnode-proxy-examples/)
-**Product docs:** [Mobile proxy by the day](https://socksnode.com/en/mobile-proxies) | [Residential proxies](https://socksnode.com/en/residential-proxies) | [API docs](https://socksnode.com/en/docs)
+**Product docs:** [Mobile proxy by the day](https://socksnode.com/en/mobile-proxies) Â· [Residential proxies](https://socksnode.com/en/residential-proxies) Â· [API docs](https://socksnode.com/en/docs)
 
 ## Examples
 
-- [examples/curl.sh](examples/curl.sh) - send a request through an HTTP or SOCKS5 endpoint.
-- [examples/python_requests.py](examples/python_requests.py) - use Requests with an environment-provided proxy.
-- [examples/playwright.mjs](examples/playwright.mjs) - configure an authenticated HTTP proxy in Playwright.
-- [index.html](index.html) - complete browser-based setup guide.
+- [`examples/curl.sh`](examples/curl.sh) â€” send a request through an HTTP or SOCKS5 endpoint.
+- [`examples/python_requests.py`](examples/python_requests.py) â€” use Requests with an environment-provided proxy.
+- [`examples/playwright.mjs`](examples/playwright.mjs) â€” configure an authenticated HTTP proxy in Playwright.
 
 ## Mobile proxy facts
 

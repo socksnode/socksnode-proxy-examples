@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SocksNode Proxy Setup Examples</title>
+  <meta name="description" content="Step-by-step SocksNode proxy setup for cURL, Python Requests, and Playwright. Use HTTP(S) or SOCKS5 endpoints and keep credentials secure.">
+  <meta property="og:title" content="SocksNode Proxy Setup Examples">
+  <meta property="og:description" content="Practical HTTP(S) and SOCKS5 proxy examples for cURL, Python Requests, and Playwright.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#f8faf9">
+  <style>
+    :root{color-scheme:light;--ink:#18352b;--muted:#556960;--line:#dce6e1;--paper:#f8faf9;--card:#fff;--green:#167351;--pale:#eaf4ef;--code:#12241d;--code-ink:#e7f4ed}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+    a{color:var(--green);text-underline-offset:3px}a:hover{color:#0e5039}header{border-bottom:1px solid var(--line);background:#fff}header nav{max-width:1080px;margin:auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{font-weight:750;color:var(--ink);text-decoration:none;letter-spacing:-.03em}.navlinks{display:flex;gap:22px;flex-wrap:wrap;font-size:14px}.navlinks a{text-decoration:none}
+    main{max-width:960px;margin:0 auto;padding:54px 24px 80px}.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--green);font-weight:700}h1,h2,h3{line-height:1.18;letter-spacing:-.035em}h1{font-size:clamp(36px,6vw,58px);max-width:800px;margin:12px 0 18px}h2{font-size:30px;margin:0 0 12px}h3{font-size:20px;margin:0 0 10px}.lead{max-width:730px;font-size:19px;color:var(--muted)}.actions{display:flex;gap:12px;flex-wrap:wrap;margin:28px 0 32px}.button{display:inline-flex;align-items:center;justify-content:center;padding:11px 17px;border-radius:7px;background:var(--ink);color:#fff;text-decoration:none;font-weight:650}.button.secondary{background:#fff;color:var(--ink);border:1px solid var(--line)}
+    .facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:28px 0 54px}.fact{border:1px solid var(--line);border-radius:12px;background:var(--card);padding:18px}.fact strong{display:block;margin-bottom:5px}.section{padding:38px 0;border-top:1px solid var(--line)}.section p,.section li{color:var(--muted)}.step-list{padding-left:22px}.code{margin:14px 0 20px;border-radius:10px;background:var(--code);color:var(--code-ink);overflow:auto}.code pre{margin:0;padding:18px 20px;white-space:pre;overflow-x:auto;font:13.5px/1.65 ui-monospace,SFMono-Regular,Consolas,monospace}.hint{padding:15px 18px;border-left:3px solid var(--green);background:var(--pale);color:var(--muted);border-radius:0 8px 8px 0}.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.card{border:1px solid var(--line);border-radius:12px;padding:22px;background:#fff}.small{font-size:14px;color:var(--muted)}footer{border-top:1px solid var(--line);background:#fff}footer div{max-width:960px;margin:auto;padding:25px 24px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;color:var(--muted);font-size:14px}
+    @media(max-width:680px){header nav{align-items:flex-start;flex-direction:column;padding:14px 18px}.navlinks{gap:12px 18px}main{padding:38px 18px 60px}.facts{grid-template-columns:1fr;gap:10px;margin-bottom:35px}.grid{grid-template-columns:1fr}.section{padding:30px 0}h2{font-size:26px}.lead{font-size:17px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  </style>
+</head>
+<body>
+  <header><nav aria-label="Main navigation"><a class="brand" href="https://socksnode.com/">SocksNode</a><div class="navlinks"><a href="#quick-start">Quick start</a><a href="#curl">cURL</a><a href="#python">Python</a><a href="#playwright">Playwright</a><a href="https://socksnode.com/en/docs">API docs</a></div></nav></header>
+  <main>
+    <p class="eyebrow">Proxy integration guide</p>
+    <h1>Connect SocksNode proxies to your tools</h1>
+    <p class="lead">Practical, copyable setup examples for HTTP(S) and SOCKS5 proxies with cURL, Python Requests, and Playwright. Use the endpoint and credentials shown in your SocksNode dashboard.</p>
+    <div class="actions"><a class="button" href="https://socksnode.com/en/dashboard">Open dashboard</a><a class="button secondary" href="https://socksnode.com/en/docs">Read API documentation</a></div>
+    <div class="facts" aria-label="Mobile proxy summary"><div class="fact"><strong>4G/5G carrier IPs</strong><span class="small">One current IP per port; keep or change it on demand.</span></div><div class="fact"><strong>Rent by time</strong><span class="small">Options range from a 2-hour trial to longer rentals.</span></div><div class="fact"><strong>Daily bandwidth</strong><span class="small">15 GB/day included; higher allowances, including unlimited, on eligible tiers.</span></div></div>
+    <section id="quick-start" class="section"><h2>Quick start</h2><ol class="step-list"><li>Choose a proxy product and location in your dashboard.</li><li>Choose HTTP(S) or SOCKS5 and copy the generated endpoint.</li><li>Set it as <code>SOCKSNODE_PROXY</code> in your shell or secret manager.</li><li>Run one of the examples below and verify against a destination you control.</li></ol><div class="hint">Mobile locations and bandwidth options depend on the selected tier. Allowances reset at 00:00 UTC; unused daily allowance does not carry over. Check the <a href="https://socksnode.com/en/mobile-proxies">live mobile proxy details</a> for current prices and limits.</div><h3 style="margin-top:24px">Endpoint format</h3><div class="code"><pre><code># SOCKS5 (use socks5h where supported to proxy DNS lookups)
+export SOCKSNODE_PROXY='socks5h://USERNAME:PASSWORD@HOST:PORT'
+
+# Or an HTTP proxy endpoint
+export SOCKSNODE_PROXY='http://USERNAME:PASSWORD@HOST:PORT'</code></pre></div><p class="small">Copy the real endpoint from your dashboard. If a credential contains reserved URL characters, percent-encode its username and password components. Never commit real credentials.</p></section>
+    <section id="curl" class="section"><h2>Use a proxy with cURL</h2><p>Pass the endpoint using cURLâ€™s proxy option:</p><div class="code"><pre><code>curl --fail --show-error \
+  --proxy "$SOCKSNODE_PROXY" \
+  https://api.ipify.org</code></pre></div><p class="small">The response reports the exit IP seen by that test endpoint. For routine checks, use a URL you control.</p></section>
+    <section id="python" class="section"><h2>Use a proxy with Python Requests</h2><p>Install Requests with SOCKS support if you plan to use a SOCKS5 endpoint:</p><div class="code"><pre><code>python -m pip install 'requests[socks]'</code></pre></div><div class="code"><pre><code>import os
+import requests
+
+proxy = os.environ["SOCKSNODE_PROXY"]
+response = requests.get(
+    "https://api.ipify.org",
+    proxies={"http": proxy, "https": proxy},
+    timeout=30,
+)
+response.raise_for_status()
+print(response.text)</code></pre></div></section>
+    <section id="playwright" class="section"><h2>Use an HTTP proxy with Playwright</h2><p>Playwright accepts HTTP proxy credentials as separate launch options. Copy the HTTP endpoint from your dashboard and set the username and password as environment variables.</p><div class="grid"><article class="card"><h3>Python</h3><p class="small">Install Playwright using its <a href="https://playwright.dev/python/docs/intro">official setup guide</a>, then pass the HTTP proxy and credentials when launching Chromium.</p><div class="code"><pre><code>import asyncio
+import os
+from urllib.parse import urlsplit
+from playwright.async_api import async_playwright
+
+async def main():
+    endpoint = urlsplit(os.environ["SOCKSNODE_PROXY"])
+    if endpoint.scheme not in {"http", "https"}:
+        raise ValueError("Use an HTTP proxy endpoint for this example")
+    server = f"{endpoint.scheme}://{endpoint.hostname}:{endpoint.port}"
+    async with async_playwright() as p:
+        browser = await p.chromium.launch(proxy={
+            "server": server,
+            "username": os.environ["SOCKSNODE_USERNAME"],
+            "password": os.environ["SOCKSNODE_PASSWORD"],
+        })
+        page = await browser.new_page()
+        await page.goto("https://example.com", wait_until="domcontentloaded")
+        print(await page.title())
+        await browser.close()
+
+asyncio.run(main())</code></pre></div></article><article class="card"><h3>Node.js</h3><p class="small">Set the proxy in the browser launch options. Install Playwright and Chromium using the <a href="https://playwright.dev/docs/intro">official setup guide</a>.</p><div class="code"><pre><code>import { chromium } from "playwright";
+
+const endpoint = new URL(process.env.SOCKSNODE_PROXY);
+if (!["http:", "https:"].includes(endpoint.protocol)) {
+  throw new Error("Use an HTTP proxy endpoint for this example");
+}
+const server = `${endpoint.protocol}//${endpoint.hostname}:${endpoint.port}`;
+const browser = await chromium.launch({
+  proxy: {
+    server,
+    username: process.env.SOCKSNODE_USERNAME,
+    password: process.env.SOCKSNODE_PASSWORD,
+  },
+});
+try {
+  const page = await browser.newPage();
+  await page.goto("https://example.com", { waitUntil: "domcontentloaded" });
+  console.log(await page.title());
+} finally {
+  await browser.close();
+}</code></pre></div></article></div></section>
+    <section id="mobile-proxy" class="section"><h2>Mobile Proxy by the Day</h2><p>Rent a mobile port for a chosen period and use its current carrier IP over HTTP(S) or SOCKS5. The base daily allowance is 15 GB per port. Higher daily allowances are paid options; unlimited daily data is only offered on Basic and Turbo tiers. The two-hour trial starts at $1. Availability and carrier choices vary by tier.</p><p>See <a href="https://socksnode.com/en/mobile-proxies">current mobile proxy pricing and details</a> or the <a href="https://socksnode.com/en/docs?product=mobile">mobile proxy API guide</a>.</p></section>
+    <section id="security" class="section"><h2>Credentials and responsible use</h2><ul><li>Keep usernames, passwords, and API keys in environment variables or a secret manager.</li><li>Do not put working credentials in repositories, screenshots, issue reports, or client-side public code.</li><li>Respect destination-site terms, access controls, privacy requirements, and applicable law.</li><li>Proxy availability and third-party website behavior can change; examples do not guarantee a destination will accept a request.</li></ul></section>
+  </main>
+  <footer><div><span>Integration examples, maintained by SocksNode and hosted on GitHub Pages.</span><span><a href="https://socksnode.com/en/mobile-proxies">Mobile proxies</a> Â· <a href="https://socksnode.com/en/docs">API docs</a> Â· <a href="https://socksnode.com/en/contact">Contact</a></span></div></footer>
+</body>
+</html>
